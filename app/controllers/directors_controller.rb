@@ -30,6 +30,30 @@ class DirectorsController < ApplicationController
     redirect_to("/directors", allow_other_host: true)
   end 
 
+  def update_director
+    # Get the user's input out of params
+    # Create and save a new row in items table 
+    # send user to / page
+
+    i = Director.new
+    i.name = params.fetch("name_director")
+    i.dob = params.fetch("dob_director")
+    i.bio = params.fetch("bio_director")
+    i.image = params.fetch("image_director")
+    i.save
+
+    redirect_to("/directors/<%= @the_director.id %>", allow_other_host: true)
+  end 
+
+  def delete_this
+    the_id = params.fetch("path_id")
+    contact = Contact.where({ :id => the_id })
+  
+    contact.destroy
+  
+    redirect_to("/contacts")
+  end
+
   def max_dob
     directors_by_dob_desc = Director.
       all.
