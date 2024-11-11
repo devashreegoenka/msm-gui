@@ -7,7 +7,7 @@
 </a>
 
 <div>
-<a href="/actors">
+<a href="/delete_director/<%= @the_director.id %>">
   Delete director
 </a>
 </div>
@@ -15,9 +15,9 @@
 <hr>
 
 
-<form action="/update_director" method="post">
+<form action="/update_director/<%= @the_director.id %>" method="post">
 <label for="zebra"> Name </label>
-    <input type="text" name="director_id" id="zebra" value="<%= @the_director.name %>">
+    <input type="text" name="name_director" id="zebra" value="<%= @the_director.name %>">
 
 
 <div>
@@ -36,7 +36,7 @@
     <input type="text" name="image_director" id="elephant" value="<%= @the_director.image %>" >
   </div>
 
-<button> Update </button>
+<button> Update director</button>
 
 </form>
 

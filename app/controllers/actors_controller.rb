@@ -36,6 +36,28 @@ class ActorsController < ApplicationController
     redirect_to("/actors", allow_other_host: true)
   end 
 
+  def update_actor
+
+    the_id = params.fetch("path_id")
+    actor = Actor.where({ :id => the_id }).at(0)
+    actor.name = params.fetch("name_actor")
+    actor.dob = params.fetch("dob_actor")
+    actor.bio = params.fetch("bio_actor")
+    actor.image = params.fetch("image_actor")
+    actor.save
+
+    redirect_to("/actors/#{actor.id}", allow_other_host: true)
+  end 
+
+  def delete_this
+    the_id = params.fetch("path_id")
+    actor = Actor.where({ :id => the_id }).at(0)
+  
+    actor.destroy
+  
+    redirect_to("/actors")
+  end
+
   def show
     the_id = params.fetch("path_id")
 

@@ -16,9 +16,6 @@ class DirectorsController < ApplicationController
   end
 
    def create_row 
-    # Get the user's input out of params
-    # Create and save a new row in items table 
-    # send user to / page
 
     i = Director.new
     i.name = params.fetch("name_director")
@@ -31,27 +28,25 @@ class DirectorsController < ApplicationController
   end 
 
   def update_director
-    # Get the user's input out of params
-    # Create and save a new row in items table 
-    # send user to / page
 
-    i = Director.new
-    i.name = params.fetch("name_director")
-    i.dob = params.fetch("dob_director")
-    i.bio = params.fetch("bio_director")
-    i.image = params.fetch("image_director")
-    i.save
+    the_id = params.fetch("path_id")
+    director = Director.where({ :id => the_id }).at(0)
+    director.name = params.fetch("name_director")
+    director.dob = params.fetch("dob_director")
+    director.bio = params.fetch("bio_director")
+    director.image = params.fetch("image_director")
+    director.save
 
-    redirect_to("/directors/<%= @the_director.id %>", allow_other_host: true)
+    redirect_to("/directors/#{director.id}", allow_other_host: true)
   end 
 
   def delete_this
     the_id = params.fetch("path_id")
-    contact = Contact.where({ :id => the_id })
+    director = Director.where({ :id => the_id }).at(0)
   
-    contact.destroy
+    director.destroy
   
-    redirect_to("/contacts")
+    redirect_to("/directors")
   end
 
   def max_dob
